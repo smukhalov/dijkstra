@@ -4,7 +4,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <limits>
-//#include <cmath>
 
 template <typename T>
 struct Edge {
@@ -12,16 +11,6 @@ struct Edge {
     int vertex_id_to;
     T weight;
 };
-//
-//template <typename T>
-//bool Equil(T x, T y){
-//    return x < y;
-//}
-//template <>
-//bool Equil(double x, double y){
-//    double eps = 0.00001;
-//    return abs(x-y) < eps;
-//}
 
 std::unordered_map<std::string, int> ReadVertex(std::istream& in = std::cin) {
     int count_vertex;
@@ -189,4 +178,39 @@ finish 4
 3 2 3
 2 4 1
 3 4 5
+ */
+
+/*
+ 6
+ start 1
+ A 2
+ B 3
+ C 4
+ D 5
+ finish 6
+ 9
+ 1 2 5
+ 1 3 2
+ 3 2 8
+ 3 5 7
+ 2 4 4
+ 2 5 2
+ 4 5 6
+ 4 6 3
+ 5 6 1
+ */
+
+/*
+ 5
+ start 1
+ A 2
+ B 3
+ C 4
+ finish 5
+ 5
+ 1 2 10
+ 2 4 20
+ 4 5 30
+ 3 2 1
+ 4 3 1
  */
