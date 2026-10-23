@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ranges>
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
@@ -111,7 +112,7 @@ void DijkstraPath(const std::unordered_map<std::string, int>& name_to_ids, const
         }
     }
 
-    std::unordered_map<int, int> parents;
+    std::unordered_map<int, int> parents;;
     for(const auto& [k, v] : name_to_ids){
         if(v == vertex_id_start){
             const auto& vertex_to_start = graph.at(v);
@@ -137,10 +138,35 @@ void DijkstraPath(const std::unordered_map<std::string, int>& name_to_ids, const
             }
         }
         processed.insert(vertex_id_for_work);
+        vertex_id_for_work = GetVertexWithMinWeight(costs, processed);
     }
     //Done!
     std::cout << '\n';
     std::cout << "result = " << costs.at(vertex_id_finish) << '\n';
+    {
+        std::vector<int> paths;
+        int vertex_id = vertex_id_finish;
+        while (true) {
+            paths.push_back(vertex_id);
+            if (vertex_id == vertex_id_start) {
+                break;
+            }
+
+            vertex_id = parents.at(vertex_id);
+        }
+
+        bool need_prefix = false;
+        for (int & path : std::ranges::reverse_view(paths)) {
+            if (need_prefix) {
+                std::cout << " -> " << path;
+            } else {
+                std::cout << path;
+                need_prefix = true;
+            }
+
+        }
+        std::cout << '\n';
+    }
 }
 
 int main() {
